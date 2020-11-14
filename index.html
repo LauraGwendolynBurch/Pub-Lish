@@ -70,13 +70,13 @@
           <div class="column is-4">
             <form action="">
               <label class="label has-text-white">Search nearby pubs</label>
-              <input class="input" type="text" placeholder="Enter a city" />
+              <input class="input" type="text" placeholder="Enter a city" id="cityName" />
 
               <div class="field">
                 <label class="label has-text-white">How many pubs do you want to visit?</label>
                 <p class="control">
                   <span class="select">
-                    <select>
+                    <select id="pubNumber">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -87,14 +87,15 @@
                 </p>
               </div>
 
-            <div class="buttons">
-              <button class="button is-warning" id="searchButton">Search</button>
-            </div>
-          </form>
-        </div>
+              <div class="buttons">
+                <button class="button is-warning">Search</button>
+              </div>
+            </form>
+          </div>
 
-        <div class="column is-8" id="mapbox">
-          <div id='map' style='width: 400px; height: 300px;'></div>
+          <div class="column is-8" id="mapbox">
+            <div id='map' style='width: 400px; height: 300px;'></div>
+          </div>
         </div>
       </div>
     </div>

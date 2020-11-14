@@ -7,17 +7,16 @@ var mapEl=$("#map");
 // button listener for search button
 
 searchBtn.on("click", function(event){
-    event.preventDefault();
+  event.preventDefault();
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     buildQueryURL();
-    console.log(searchBtn);
-    // localStorage
+  // local storage
+  
 });
 
-
 function buildQueryURL() {
-       console.log(pubAmount);
+       console.log(cityEl)
     var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount;
     
     $.ajax({

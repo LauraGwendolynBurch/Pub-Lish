@@ -1,8 +1,6 @@
 var searchBtn = $("#searchButton");
 var cityEl;
 var pubAmount;
-// var mapEl = $()
-// var listEl = $()
 var mapEl=$("#map");
 
 

@@ -1,15 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
-</head>
-<body>
-  <div id='map' style='width: 400px; height: 300px;'></div>
 
-  <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div id="name"></div>
+      <div id="mylocation"></div>
+      <div id="emailus"></div>
+    </header>
+
+    <nav></nav>
+
+    <div id="main">
+      <div id="aside">
+        <form action="">
+          <h3>Search nearby pubs</h3>
+          <input type="search" placeholder="Enter a city" /> <br />
+          <label for="numberOfPubs">How many pubs do you want to visit?</label>
+          <select name="" id="numberOfPubs">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <br />
+          <button id="searcBtn" type="submit">Search</button>
+        </form>
+      </div>
+
+      <div id="mapbox">
+        <div id='map' style='width: 400px; height: 300px;'></div>
+      </div>
+    </div>
+
+    <footer></footer>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
   <script>
   mapboxgl.accessToken = 'pk.eyJ1IjoidGJvbmQ0IiwiYSI6ImNraGVhOG51dDAwaDgydHBqbmNncnoxbngifQ.2PVL5DYBnVm1EeZOIUwTXw';
   var map = new mapboxgl.Map({
@@ -17,5 +51,6 @@
   style: 'mapbox://styles/mapbox/streets-v11'
   });
   </script>
-</body>
+  </body>
 </html>
+

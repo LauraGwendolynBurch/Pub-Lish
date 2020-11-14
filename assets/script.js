@@ -4,14 +4,23 @@ var mapEl = $()
 var listEl = $()
 var mapEl=$("#map");
 
+
+// button listener for search button
+
 function buildQueryURL() {
-    var cityName = document.getElementById("needs id?").val();
-    var pubAmount = document.getElementById("needs id?").val();
+    var cityName = $().val();
+
+    var pubAmount = $().val();
+    
     var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityName;
 
-    $.ajax ({       
-    })
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response){
 
+      }); 
+           
 };
 
   function createMarker(long, lat){

@@ -6,11 +6,12 @@ var mapEl=$("#map");
 
 // button listener for search button
 
-searchBtn.on("click", function(){
+$(searchBtn).on("click", function(event){
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber");
     buildQueryURL();
     console.log(searchBtn);
+    // localStorage
 });
 
 
@@ -40,6 +41,7 @@ function buildQueryURL() {
      },
         trackUserLocation: true
  }));
+
 
 // button made to clear all local storage and text content should we need
 // var clearButton = $("#button")

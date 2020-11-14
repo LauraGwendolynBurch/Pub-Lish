@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-
-  <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <!-- <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
-    /> -->
-
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+
     <style>
       html {
         background-image: url(assets/Taps.jpg);
@@ -28,83 +21,81 @@
         background-color: black;
       }
 
-  <style>
-    html {
-      background-image: url(1.jpg);
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-      background-color: black;
-    }
+ 
+    </style>
+  </head>
 
-    /* * {
-        outline: 1px solid red;
-      } */
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <section class="hero is-bold is-warning">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">PUB-LISH</h1>
+  <body>
+    <div class="container">
+      <section class="hero is-bold is-warning">
+        <div class="hero-body columns">
+          <div class="column is-one-third is-justify-content-flex-start mx-0">
+                <h1 class="title">PUB-LISH</h1>
+                <h2 class="subtitle">Why walk when you can crawl</h2>
+            </div>
+            <div class="column is-two-thirds is-justify-content-flex-end mx-0">    
+                
+                <p>
+                Design a custom pub crawl from any city in the world.  Simply type the name of a city into the search bar,
+                set the number of pubs you wish to visit, and don't forget to drink lots of water.
+                  As always drink responsibly and never drink and drive.</p>
+          </div>
         </div>
+      </section>
+    
+      <div class="block">
+        <nav class="navbar">
+          <div class="navbar-start">
+            <a href="#" class="navbar-item">
+              <h1 class="title is-4 has-text-warning-dark">Home</h1>
+            </a>
+          </div>
+
+          <div class="navbar-end navbar-menu">
+            <a href="#" class="navbar-item">Location</a>
+            <a href="#" class="navbar-item">About Us</a>
+            <a href="#" class="navbar-item">Email Us</a>
+            <a href="#" class="navbar-item"
+              ><span class="icon"><i class="fa fa-github"></i></span>
+            </a>
+            <a href="#" class="navbar-item">
+              <span class="icon"><i class="fa fa-twitter"></i></span>
+            </a>
+          </div>
+        </nav>
       </div>
-    </section>
+ 
+      <div id="main">
+        <div class="columns">
+          <div class="column is-4">
+            <form action="">
+              <label class="label has-text-white">Search nearby pubs</label>
+              <input class="input" type="text" placeholder="Enter a city" id="cityName" />
 
-    <div class="block">
-      <nav class="nav">
-        <div class="nav-left">
-          <a href="#" class="nav-item">
-            <h1 class="title is-4">Home</h1>
-          </a>
-        </div>
+              <div class="field">
+                <label class="label has-text-white">How many pubs do you want to visit?</label>
+                <p class="control">
+                  <span class="select">
+                    <select id="pubNumber">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </span>
+                </p>
+              </div>
 
-        <div class="nav-right nav-menu">
-          <a href="#" class="nav-item">Location</a>
-          <a href="#" class="nav-item">About Us</a>
-          <a href="#" class="nav-item">Email Us</a>
-          <a href="#" class="nav-item"><span class="icon"><i class="fa fa-github"></i></span>
-          </a>
-          <a href="#" class="nav-item">
-            <span class="icon"><i class="fa fa-twitter"></i></span>
-          </a>
-        </div>
-      </nav>
-    </div>
+              <div class="buttons">
+                <button class="button is-warning">Search</button>
+              </div>
+            </form>
+          </div>
 
-    <div id="main">
-      <div class="columns">
-        <div class="column is-4">
-          <form action="">
-            <label class="label has-text-white">Search nearby pubs</label>
-            <input class="input" type="text" placeholder="Enter a city" id="cityName">
-
-            <div class="field">
-              <label class="label">How many pubs do you want to visit?</label>
-              <p class="control">
-                <span class="select">
-                  <select id="pubNumber">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                </span>
-              </p>
-            </div>
-
-            <div class="buttons">
-              <button class="button is-warning" id="searchButton">Search</button>
-            </div>
-          </form>
-        </div>
-
-        <div class="column is-8" id="mapbox">
-          <div id='map' style='width: 400px; height: 300px;'></div>
+          <div class="column is-8" id="mapbox">
+            <div id='map' style='width: 400px; height: 300px;'></div>
+          </div>
         </div>
       </div>
     </div>

@@ -6,25 +6,25 @@ var mapEl=$("#map");
 
 // button listener for search button
 
-$(searchBtn).on("click", function(event){
+searchBtn.on("click", function(event){
+    event.preventDefault();
     cityEl = $("#cityName").val();
-    pubAmount = $("#pubNumber");
+    pubAmount = $("#pubNumber").val();
     buildQueryURL();
     console.log(searchBtn);
     // localStorage
 });
 
 
-
 function buildQueryURL() {
-       
+       console.log(pubAmount);
     var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount;
     
     $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function(response){
-        console.log(response)
+        console.log(response);
       }); 
            
 };

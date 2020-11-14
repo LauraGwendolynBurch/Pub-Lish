@@ -10,6 +10,7 @@ searchBtn.on("click", function(){
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber");
     buildQueryURL();
+    console.log(searchBtn);
 });
 
 

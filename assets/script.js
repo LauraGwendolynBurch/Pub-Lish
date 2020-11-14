@@ -1,31 +1,31 @@
-$(document).ready(function(){
-
-var searchBtn = $("#searchButton")
-var cityEl = $("#cityName")
-var pubAmount = $("#pubNumber")
-var listEl = $()
+var searchBtn = $("#searchButton");
+var cityEl;
+var pubAmount;
 var mapEl=$("#map");
 
 
+// button listener for search button
 
-
- $(".searchBtn").on("click", function(event){
-    var cityBox = $(this).siblings(".textEl").val()
-    // console.log
-    var textId =  $(this).siblings(".textEl").attr("id")
-    //console.log
-    localStorage.setItem(textId, cityBox);
- })
-  //appending the text to assigned row once browser page is refreshed 
-  $("#input9").append(localStorage.getItem("input9"));
+searchBtn.on("click", function(){
+    cityEl = $("#cityName").val();
+    pubAmount = $("#pubNumber");
+    buildQueryURL();
+});
 
 
 
-
-
-
-
-
+function buildQueryURL() {
+       
+    var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount;
+    
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response){
+        console.log(response)
+      }); 
+           
+};
 
   function createMarker(long, lat){
     var marker = new mapboxgl.Marker()
@@ -51,4 +51,3 @@ var mapEl=$("#map");
 //create button event to call the clearing of local storage 
 // $(clearButton).on("click",buttonClear)
 
-})

@@ -7,7 +7,7 @@ var mapEl=$("#map");
 // button listener for search button
 
 searchBtn.on("click", function(event){
-  event.preventDefault();
+    event.preventDefault();
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     buildQueryURL();
@@ -24,6 +24,10 @@ function buildQueryURL() {
         method: "GET"
       }).then(function(response){
         console.log(response);
+        for(var i=0;i<pubAmount;i++){
+          console.log(response[i].longitude)
+          createMarker(response[i].longitude, response[i].latitude);
+        }
       }); 
            
 };

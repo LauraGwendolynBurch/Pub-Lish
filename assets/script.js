@@ -14,6 +14,7 @@ $(document).ready(function () {
   var pubName;
   var pubAddress;
   var pubLink;
+  var cityZip;
 
   // button listener for search button
 
@@ -22,6 +23,7 @@ $(document).ready(function () {
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     $("#cityName").val("");
+    // zipCode();
     buildQueryURL();
 
     localStorage.setItem("currentCity", cityEl);
@@ -34,7 +36,8 @@ $(document).ready(function () {
     console.log(pubAmount);
     buildQueryURL();
 
-  }
+  };
+
 
   function buildQueryURL() {
     console.log(cityEl)
@@ -61,6 +64,32 @@ $(document).ready(function () {
     });
 
   };
+
+  // // possible zipcode render
+  // // function zipCode() {
+  // //   var queryURLZip = "https://api.openbrewerydb.org/breweries?by_postal=" + cityZip + "&per_page=" + pubAmount;
+  // //   $.ajax({
+  // //     url: queryURLZip,
+  // //     method: "GET"
+  // //   }).then(function (response) {
+  // //     console.log(response);
+  // //     for (var i = 0; i < pubAmount; i++) {
+  // //       var tRow = $("<tr>");
+  // //       var breweryName = $("<td>").text(response[i].name);
+  // //       var breweryAddress = $("<td>").text(response[i].street);
+  // //       var breweryType = $("<td>").text(response[i].brewery_type);
+  // //       var breweryURL = $("<td>").text(response[i].website_url);
+  // //       // working on delete button
+  // //       // working on savebutton
+  // //       // var deleteBrewery = $("<button>").on("click", function());
+  // //       tRow.append(breweryName, breweryAddress, breweryType, breweryURL);
+  // //       $("#search-result").append(tRow);
+  // //       createMarker(response[i].longitude, response[i].latitude);
+  // //     }
+  // //   });
+
+
+  // };
 
   function createMarker(long, lat) {
 

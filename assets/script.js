@@ -2,7 +2,7 @@ var searchBtn = $("#searchButton");
 var cityEl;
 var pubAmount;
 var mapEl=$("#map");
-
+var marker;
 
 // button listener for search button
 
@@ -33,9 +33,10 @@ function buildQueryURL() {
 };
 
   function createMarker(long, lat){
-    var marker = new mapboxgl.Marker()
+     marker = new mapboxgl.Marker()
     .setLngLat([long,lat])
     .addTo(map);
+    
 }
     
     map.addControl(new mapboxgl.GeolocateControl({
@@ -45,6 +46,8 @@ function buildQueryURL() {
         trackUserLocation: true
  }));
 
- 
+ function removeMarker(marker){
+  marker.remove();
+ }
 
 

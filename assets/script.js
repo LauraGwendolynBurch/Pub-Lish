@@ -1,7 +1,12 @@
+$(document).ready(function(){
+
 var searchBtn = $("#searchButton");
 var cityEl;
 var pubAmount;
 var mapEl=$("#map");
+var localCity=localStorage.getItem("currentCity")
+// var  = JSON.parse(localStorage.getItem("")) || []
+var pubAmount=localStorage.getItem("numberOfPubs")
 var marker;
 
 // button listener for search button
@@ -11,9 +16,14 @@ searchBtn.on("click", function(event){
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     buildQueryURL();
-  // local storage
-  
+   // local storage
+   localStorage.setItem("currentCity", (cityEl));
+   localStorage.setItem("numberOfPubs", JSON.stringify(pubAmount))
+   console.log(localStorage)
+   console.log("currentCity")
 });
+
+
 
 function buildQueryURL() {
        console.log(cityEl)
@@ -29,7 +39,7 @@ function buildQueryURL() {
           createMarker(response[i].longitude, response[i].latitude);
         }
       }); 
-           
+     
 };
 
   function createMarker(long, lat){
@@ -50,4 +60,15 @@ function buildQueryURL() {
   marker.remove();
  }
 
+// button made to clear all local storage and text content should we need
+// var clearButton = $("#button")
 
+// function buttonClear(){
+//     localStorage.clear();
+//     location.reload();
+// }
+
+//create button event to call the clearing of local storage 
+// $(clearButton).on("click",buttonClear)
+
+})

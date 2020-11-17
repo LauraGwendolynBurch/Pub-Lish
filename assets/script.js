@@ -80,7 +80,8 @@ function buildQueryURL() {
  function removeMarker(marker){
   marker.remove();
  }
- 
+
+
 
  storeCity();
 // button made to clear all local storage and text content should we need

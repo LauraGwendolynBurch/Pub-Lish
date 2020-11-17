@@ -18,7 +18,7 @@ searchBtn.on("click", function(event){
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     $("#cityName").val("");
-    buildQueryURL();
+   buildQueryURL();
    // local storage
    localStorage.setItem("currentCity", cityEl);
    localStorage.setItem("numberOfPubs", pubAmount)
@@ -62,6 +62,8 @@ function buildQueryURL() {
     // center: marker,
     // zoom: 15
     // });
+
+   
      
     // // create the popup
     var popup = new mapboxgl.Popup({ offset: 25 }).setText(
@@ -84,8 +86,18 @@ function buildQueryURL() {
     .setPopup(popup)
     .addTo(map);
     
+    fly(long,lat);
 }
-    
+map.on('click', 'symbols', function (e) {
+map.flyTo({
+center: e.features[0].geometry.coordinates
+});
+    function fly(long,lat){
+      map.flyTo({
+        center: [long,lat],
+        essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+    }
     map.addControl(new mapboxgl.GeolocateControl({
         positionOptions: {
         enableHighAccuracy: true

@@ -1,3 +1,5 @@
+$(document).ready(function(){
+
 var searchBtn = $("#searchButton");
 var cityEl;
 var pubAmount;
@@ -5,18 +7,20 @@ var mapEl=$("#map");
 var localCity=localStorage.getItem("currentCity")
 // var  = JSON.parse(localStorage.getItem("")) || []
 var pubAmount=localStorage.getItem("numberOfPubs")
+var marker;
+
 // button listener for search button
 
 searchBtn.on("click", function(event){
-  event.preventDefault();
+    event.preventDefault();
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     buildQueryURL();
    // local storage
    localStorage.setItem("currentCity", (cityEl));
    localStorage.setItem("numberOfPubs", JSON.stringify(pubAmount))
-   // console.log(localStorage)
-   // console.log("currentCity")
+   console.log(localStorage)
+   console.log("currentCity")
 });
 
 
@@ -30,14 +34,19 @@ function buildQueryURL() {
         method: "GET"
       }).then(function(response){
         console.log(response);
+        for(var i=0;i<pubAmount;i++){
+          console.log(response[i].longitude)
+          createMarker(response[i].longitude, response[i].latitude);
+        }
       }); 
      
 };
 
   function createMarker(long, lat){
-    var marker = new mapboxgl.Marker()
+     marker = new mapboxgl.Marker()
     .setLngLat([long,lat])
     .addTo(map);
+    
 }
     
     map.addControl(new mapboxgl.GeolocateControl({
@@ -47,6 +56,9 @@ function buildQueryURL() {
         trackUserLocation: true
  }));
 
+ function removeMarker(marker){
+  marker.remove();
+ }
 
 // button made to clear all local storage and text content should we need
 // var clearButton = $("#button")
@@ -59,3 +71,4 @@ function buildQueryURL() {
 //create button event to call the clearing of local storage 
 // $(clearButton).on("click",buttonClear)
 
+})

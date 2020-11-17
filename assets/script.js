@@ -2,12 +2,12 @@ var searchBtn = $("#searchButton");
 var cityEl;
 var pubAmount;
 var mapEl=$("#map");
-
+var marker;
 
 // button listener for search button
 
 searchBtn.on("click", function(event){
-  event.preventDefault();
+    event.preventDefault();
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     buildQueryURL();
@@ -24,14 +24,19 @@ function buildQueryURL() {
         method: "GET"
       }).then(function(response){
         console.log(response);
+        for(var i=0;i<pubAmount;i++){
+          console.log(response[i].longitude)
+          createMarker(response[i].longitude, response[i].latitude);
+        }
       }); 
            
 };
 
   function createMarker(long, lat){
-    var marker = new mapboxgl.Marker()
+     marker = new mapboxgl.Marker()
     .setLngLat([long,lat])
     .addTo(map);
+    
 }
     
     map.addControl(new mapboxgl.GeolocateControl({
@@ -41,6 +46,8 @@ function buildQueryURL() {
         trackUserLocation: true
  }));
 
- 
+ function removeMarker(marker){
+  marker.remove();
+ }
 
 

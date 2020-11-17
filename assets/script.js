@@ -8,6 +8,8 @@ var localCity=localStorage.getItem("currentCity")
 // var  = JSON.parse(localStorage.getItem("")) || []
 var pubAmount=localStorage.getItem("numberOfPubs")
 var marker;
+var NameOfCity;
+var typeOfBrew;
 
 // button listener for search button
 
@@ -15,15 +17,20 @@ searchBtn.on("click", function(event){
     event.preventDefault();
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
-    buildQueryURL();
-   // local storage
-   localStorage.setItem("currentCity", (cityEl));
-   localStorage.setItem("numberOfPubs", JSON.stringify(pubAmount))
-   console.log(localStorage)
-   console.log("currentCity")
+    $("#cityName").val("");
+   buildQueryURL();
+
+   localStorage.setItem("currentCity", cityEl);
+   localStorage.setItem("numberOfPubs", pubAmount)
 });
 
+function storeCity (){
+  cityEl = localCity
+  pubAmount = pubAmount
+  console.log(pubAmount);
+  buildQueryURL();
 
+}
 
 function buildQueryURL() {
        console.log(cityEl)
@@ -35,7 +42,8 @@ function buildQueryURL() {
       }).then(function(response){
         console.log(response);
         for(var i=0;i<pubAmount;i++){
-          console.log(response[i].longitude)
+          NameOfCity=response[i].name;
+          typeOfBrew=response[i].brewery_type;
           createMarker(response[i].longitude, response[i].latitude);
         }
       }); 
@@ -43,12 +51,25 @@ function buildQueryURL() {
 };
 
   function createMarker(long, lat){
+
+    var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+      NameOfCity + 
+      " Type of Brewery: " + typeOfBrew 
+    );
+
      marker = new mapboxgl.Marker()
     .setLngLat([long,lat])
+    .setPopup(popup)
     .addTo(map);
-    
+    fly(long,lat);
 }
-    
+
+    function fly(long,lat){
+      map.flyTo({
+        center: [long,lat],
+        essential: true 
+        });
+    }
     map.addControl(new mapboxgl.GeolocateControl({
         positionOptions: {
         enableHighAccuracy: true
@@ -60,6 +81,9 @@ function buildQueryURL() {
   marker.remove();
  }
 
+
+
+ storeCity();
 // button made to clear all local storage and text content should we need
 // var clearButton = $("#button")
 

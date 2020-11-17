@@ -17,13 +17,19 @@ searchBtn.on("click", function(event){
     pubAmount = $("#pubNumber").val();
     buildQueryURL();
    // local storage
-   localStorage.setItem("currentCity", (cityEl));
-   localStorage.setItem("numberOfPubs", JSON.stringify(pubAmount))
-   console.log(localStorage)
-   console.log("currentCity")
+   localStorage.setItem("currentCity", cityEl);
+   localStorage.setItem("numberOfPubs", pubAmount)
+  //  console.log(localStorage)
+  //  console.log("currentCity")
 });
 
+function storeCity (){
+  cityEl = localCity
+  pubAmount = pubAmount
+  console.log(pubAmount);
+  buildQueryURL();
 
+}
 
 function buildQueryURL() {
        console.log(cityEl)
@@ -60,6 +66,7 @@ function buildQueryURL() {
   marker.remove();
  }
 
+ storeCity();
 // button made to clear all local storage and text content should we need
 // var clearButton = $("#button")
 

@@ -2,8 +2,9 @@ var searchBtn = $("#searchButton");
 var cityEl;
 var pubAmount;
 var mapEl=$("#map");
-
-
+var localCity=localStorage.getItem("currentCity")
+// var  = JSON.parse(localStorage.getItem("")) || []
+var pubAmount=localStorage.getItem("numberOfPubs")
 // button listener for search button
 
 searchBtn.on("click", function(event){
@@ -11,9 +12,14 @@ searchBtn.on("click", function(event){
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     buildQueryURL();
-  // local storage
-  
+   // local storage
+   localStorage.setItem("currentCity", (cityEl));
+   localStorage.setItem("numberOfPubs", JSON.stringify(pubAmount))
+   // console.log(localStorage)
+   // console.log("currentCity")
 });
+
+
 
 function buildQueryURL() {
        console.log(cityEl)
@@ -25,7 +31,7 @@ function buildQueryURL() {
       }).then(function(response){
         console.log(response);
       }); 
-           
+     
 };
 
   function createMarker(long, lat){

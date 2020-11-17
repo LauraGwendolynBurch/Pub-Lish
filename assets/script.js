@@ -19,11 +19,9 @@ searchBtn.on("click", function(event){
     pubAmount = $("#pubNumber").val();
     $("#cityName").val("");
    buildQueryURL();
-   // local storage
+
    localStorage.setItem("currentCity", cityEl);
    localStorage.setItem("numberOfPubs", pubAmount)
-  //  console.log(localStorage)
-  //  console.log("currentCity")
 });
 
 function storeCity (){
@@ -54,48 +52,22 @@ function buildQueryURL() {
 
   function createMarker(long, lat){
 
-    // mapboxgl.accessToken = 'pk.eyJ1IjoidGJvbmQ0IiwiYSI6ImNraGVhOG51dDAwaDgydHBqbmNncnoxbngifQ.2PVL5DYBnVm1EeZOIUwTXw';
-    // marker= [long,lat];
-    // var map = new mapboxgl.Map({
-    // container: 'map',
-    // style: 'mapbox://styles/mapbox/light-v10',
-    // center: marker,
-    // zoom: 15
-    // });
-
-   
-     
-    // // create the popup
     var popup = new mapboxgl.Popup({ offset: 25 }).setText(
       NameOfCity + 
       " Type of Brewery: " + typeOfBrew 
     );
-     
-    // // create DOM element for the marker
-    // var el = document.createElement('div');
-    // el.id = 'marker';
-
-    // new mapboxgl.Marker(el)
-    // .setLngLat(marker)
-    // .setPopup(popup) // sets a popup on this marker
-    // .addTo(map1);
-    // console.log(map1);
 
      marker = new mapboxgl.Marker()
     .setLngLat([long,lat])
     .setPopup(popup)
     .addTo(map);
-    
     fly(long,lat);
 }
-map.on('click', 'symbols', function (e) {
-map.flyTo({
-center: e.features[0].geometry.coordinates
-});
+
     function fly(long,lat){
       map.flyTo({
         center: [long,lat],
-        essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        essential: true 
         });
     }
     map.addControl(new mapboxgl.GeolocateControl({

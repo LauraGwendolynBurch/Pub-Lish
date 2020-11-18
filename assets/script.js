@@ -53,8 +53,7 @@ function buildQueryURL() {
   function createMarker(long, lat){
 
     var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-      NameOfCity + 
-      " Type of Brewery: " + typeOfBrew 
+      NameOfCity +  " Type of Brewery: " + typeOfBrew 
     );
 
      marker = new mapboxgl.Marker()

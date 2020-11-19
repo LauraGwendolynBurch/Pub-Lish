@@ -23,12 +23,11 @@ $(document).ready(function () {
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     $("#cityName").val("");
-    // zipCode();
-    buildQueryURL();
+   buildQueryURL();
+   localStorage.setItem("currentCity", cityEl);
+   localStorage.setItem("numberOfPubs", pubAmount)
+});
 
-    localStorage.setItem("currentCity", cityEl);
-    localStorage.setItem("numberOfPubs", pubAmount)
-  });
 
   function storeCity() {
     cityEl = localCity
@@ -37,6 +36,7 @@ $(document).ready(function () {
     buildQueryURL();
 
   };
+
 
 
   function buildQueryURL() {
@@ -119,6 +119,35 @@ $(document).ready(function () {
       NameOfCity +
       " Type of Brewery: " + typeOfBrew
     );
+
+function buildQueryURL() {
+       console.log(cityEl)
+    var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount * 2 ;
+    
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response){
+        console.log(response);
+        for(var i=0;i<pubAmount;i++){
+          NameOfCity=response[i].name;
+          typeOfBrew=response[i].brewery_type;
+            if(response[i].longitude == null){
+             
+            }else{
+          createMarker(response[i].longitude, response[i].latitude);
+            }
+        }
+      }); 
+     
+};
+
+  function createMarker(long, lat){
+
+    var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+      NameOfCity + ", " + 
+    typeOfBrew + " brewery");
+
 
     marker = new mapboxgl.Marker()
       .setLngLat([long, lat])

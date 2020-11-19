@@ -50,9 +50,10 @@ $(document).ready(function () {
     $(event.target).parent().empty();
   })
 
-  function buildQueryURL() {
-    console.log(cityEl)
-    var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount * 2;
+
+function buildQueryURL() {
+       console.log(cityEl)
+    var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=25";
 
     $.ajax({
       url: queryURL,
@@ -87,7 +88,14 @@ $(document).ready(function () {
         divEL.append(breweryName, sp, breweryType, sp, breweryAddress, sp, breweryURL, btnEl);
 
         searchResults.append(divEL);
-        if (response[i].longitude == null) {
+        if (response[i].longitude == null
+              || response[i].brewery_type == null
+              || response[i].brewery_type == "large"
+              || response[i].brewery_type == "planning"
+              || response[i].brewery_type == "bar"
+              || response[i].brewery_type == "contract"
+              || response[i].brewery_type == "proprietor"
+              || response[i].brewery_type == "closed" ) {
 
         } else {
           createMarker(response[i].longitude, response[i].latitude);

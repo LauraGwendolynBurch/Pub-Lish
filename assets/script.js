@@ -189,4 +189,4 @@ function buildQueryURL() {
   //create button event to call the clearing of local storage 
   // $(clearButton).on("click",buttonClear)
 
-})
+

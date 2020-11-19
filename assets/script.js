@@ -5,7 +5,6 @@ $(document).ready(function () {
   var pubAmount;
   var mapEl = $("#map");
   var localCity = localStorage.getItem("currentCity")
-  // var  = JSON.parse(localStorage.getItem("")) || []
   var pubAmount = localStorage.getItem("numberOfPubs")
   var marker;
   var NameOfCity;
@@ -64,10 +63,10 @@ function buildQueryURL() {
           NameOfCity=response[i].name;
           typeOfBrew=response[i].brewery_type;
         var tRow = $("<tr>");
-        var breweryName = $("<td>").text(response[i].name);
-        var breweryAddress = $("<td>").text(response[i].street);
-        var breweryType = $("<td>").text(response[i].brewery_type);
-        var breweryURL = $("<td>").text(response[i].website_url);
+        var breweryName = $("<tr>").text(response[i].name);
+        var breweryAddress = $("<tr>").text(response[i].street);
+        var breweryType = $("<tr>").text(response[i].brewery_type);
+        var breweryURL = $("<tr>").text(response[i].website_url);
         // working on delete button
         // working on savebutton
         tRow.append(breweryName, breweryAddress, breweryType, breweryURL, deleteBrewery);

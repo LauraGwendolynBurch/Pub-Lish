@@ -52,7 +52,7 @@ $(document).ready(function () {
 
 function buildQueryURL() {
        console.log(cityEl)
-    var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount * 2 ;
+    var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=25";
     
     $.ajax({
         url: queryURL,
@@ -60,23 +60,33 @@ function buildQueryURL() {
       }).then(function(response){
         console.log(response);
         searchResults.empty();
-        for(var i=0;i<pubAmount;i++){
+        for(var i=0, j=0 ; j < pubAmount; i++){
           NameOfCity=response[i].name;
           typeOfBrew=response[i].brewery_type;
+        // working on delete button
+        // working on savebutton
+ 
+        searchResults.append(tRow);
+            if(response[i].longitude == null 
+              || response[i].brewery_type == null
+              || response[i].brewery_type == "large"
+              || response[i].brewery_type == "planning"
+              || response[i].brewery_type == "bar"
+              || response[i].brewery_type == "contract"
+              || response[i].brewery_type == "proprietor"
+              || response[i].brewery_type == "closed" ){
+             
+            }
+            else{
+          createMarker(response[i].longitude, response[i].latitude);
         var tRow = $("<tr>");
         var breweryName = $("<td>").text(response[i].name);
         var breweryAddress = $("<td>").text(response[i].street);
         var breweryType = $("<td>").text(response[i].brewery_type);
         var breweryURL = $("<td>").text(response[i].website_url);
-        // working on delete button
-        // working on savebutton
         tRow.append(breweryName, breweryAddress, breweryType, breweryURL, deleteBrewery);
-        searchResults.append(tRow);
-            if(response[i].longitude == null){
-             
-            }else{
-          createMarker(response[i].longitude, response[i].latitude);
-            }
+         j++;
+  }
         }
       }); 
      

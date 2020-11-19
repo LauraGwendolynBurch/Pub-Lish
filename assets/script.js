@@ -63,7 +63,8 @@ $(document).ready(function () {
     });
 
   };
-  // delete button for row (currently working to show button on all rows)
+
+  // delete button for row (currently working to show button on all rows). 
   function deleteBrewery() {
     var deleteBreweryButton = $('<td><button>X</button></td>').click(function(event) {
       

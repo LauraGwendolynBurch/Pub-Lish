@@ -17,6 +17,7 @@ $(document).ready(function () {
   var breweryURL;
   var searchResults = $("#search-result");
   var markerArr=[];
+  deleteButtton=$("#search-result");
 
 
   searchBtn.on("click", function (event) {
@@ -45,11 +46,9 @@ $(document).ready(function () {
   };
   
   // delete button for row (currently working to show button on all rows). 
-  function deleteBrewery() {
-    var deleteBreweryButton = $('<td><button>X</button></td>').click(function(event) {
-      
-    });
-  };
+  deleteButtton.on("click","button",function(event){
+    $(event.target).parent().empty();
+  })
 
   //  save button for row
   // function saveBrewery() {
@@ -75,6 +74,7 @@ function buildQueryURL() {
         var breweryAddress = $("<td>").text(response[i].street);
         var breweryType = $("<td>").text(response[i].brewery_type);
         var breweryURL = $("<td>").text(response[i].website_url);
+        var deleteBrewery=$("<button>").text("X");
         // working on delete button
         // working on savebutton
         tRow.append(breweryName, breweryAddress, breweryType, breweryURL, deleteBrewery);

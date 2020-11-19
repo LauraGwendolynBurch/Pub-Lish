@@ -54,16 +54,6 @@ function buildQueryURL() {
 };
 
   function createMarker(long, lat){
-
-    // mapboxgl.accessToken = 'pk.eyJ1IjoidGJvbmQ0IiwiYSI6ImNraGVhOG51dDAwaDgydHBqbmNncnoxbngifQ.2PVL5DYBnVm1EeZOIUwTXw';
-    // marker= [long,lat];
-    // var map = new mapboxgl.Map({
-    // container: 'map',
-    // style: 'mapbox://styles/mapbox/light-v10',
-    // center: marker,
-    // zoom: 15
-    // });
-     
     // // create the popup
     var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
       `${NameOfCity} 

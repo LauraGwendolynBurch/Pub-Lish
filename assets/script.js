@@ -18,12 +18,10 @@ searchBtn.on("click", function(event){
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     $("#cityName").val("");
-    buildQueryURL();
-   // local storage
+   buildQueryURL();
+
    localStorage.setItem("currentCity", cityEl);
    localStorage.setItem("numberOfPubs", pubAmount)
-  //  console.log(localStorage)
-  //  console.log("currentCity")
 });
 
 function storeCity (){
@@ -69,24 +67,20 @@ function buildQueryURL() {
       <br>
       Type of Brewery: ${typeOfBrew}`
     );
-     
-    // // create DOM element for the marker
-    // var el = document.createElement('div');
-    // el.id = 'marker';
-
-    // new mapboxgl.Marker(el)
-    // .setLngLat(marker)
-    // .setPopup(popup) // sets a popup on this marker
-    // .addTo(map1);
-    // console.log(map1);
 
      marker = new mapboxgl.Marker()
     .setLngLat([long,lat])
     .setPopup(popup)
     .addTo(map);
-    
+    fly(long,lat);
 }
-    
+
+    function fly(long,lat){
+      map.flyTo({
+        center: [long,lat],
+        essential: true 
+        });
+    }
     map.addControl(new mapboxgl.GeolocateControl({
         positionOptions: {
         enableHighAccuracy: true
@@ -97,7 +91,8 @@ function buildQueryURL() {
  function removeMarker(marker){
   marker.remove();
  }
- 
+
+
 
  storeCity();
 // button made to clear all local storage and text content should we need

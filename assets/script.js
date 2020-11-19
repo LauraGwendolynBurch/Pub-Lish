@@ -9,14 +9,14 @@ $(document).ready(function () {
   var pubAmount = localStorage.getItem("numberOfPubs")
   var marker;
   var NameOfCity;
-  // information on the pub display
   var typeOfBrew;
-  var pubName;
-  var pubAddress;
-  var pubLink;
   var cityZip;
+  var breweryName;
+  var breweryAddress;
+  var brewery_type;
+  var breweryURL;
 
-  // button listener for search button
+
 
   searchBtn.on("click", function (event) {
     event.preventDefault();
@@ -56,14 +56,35 @@ $(document).ready(function () {
         var breweryURL = $("<td>").text(response[i].website_url);
         // working on delete button
         // working on savebutton
-        // var deleteBrewery = $("<button>").on("click", function());
-        tRow.append(breweryName, breweryAddress, breweryType, breweryURL);
+        tRow.append(breweryName, breweryAddress, breweryType, breweryURL, deleteBrewery);
         $("#search-result").append(tRow);
         createMarker(response[i].longitude, response[i].latitude);
       }
     });
 
   };
+  // delete button for row (currently working to show button on all rows)
+  function deleteBrewery() {
+    var deleteBreweryButton = $('<td><button>X</button></td>').click(function(event) {
+      
+    });
+  };
+
+  //  save button for row
+  // function saveBrewery() {
+  //   var saveBreweryButton = $("<td><button>save</button></td>").click(function() {
+  //   });
+  // };
+
+
+  // function mySave() {
+  //   var myContent = document.getElementById("myTextarea").value;
+  //   localStorage.setItem("myContent", myContent);
+  // }
+
+
+
+
 
   // // possible zipcode render
   // // function zipCode() {

@@ -5,7 +5,6 @@ $(document).ready(function () {
   var pubAmount;
   var mapEl = $("#map");
   var localCity = localStorage.getItem("currentCity")
-  // var  = JSON.parse(localStorage.getItem("")) || []
   var pubAmount = localStorage.getItem("numberOfPubs")
   var marker;
   var NameOfCity;
@@ -16,10 +15,18 @@ $(document).ready(function () {
   var brewery_type;
   var breweryURL;
   var searchResults = $("#search-result");
+  var markerArr=[];
+  deleteButtton=$("#search-result");
 
 
   searchBtn.on("click", function (event) {
     event.preventDefault();
+    
+    for(var j=0;j<markerArr.length;j++){
+      removeMarker(markerArr[j]);
+    }
+      
+    
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     $("#cityName").val("");
@@ -38,17 +45,10 @@ $(document).ready(function () {
   };
 
   // delete button for row (currently working to show button on all rows). 
-  function deleteBrewery() {
-    var deleteBreweryButton = $('<td><button>X</button></td>').click(function (event) {
 
-    });
-  };
-
-  //  save button for row
-  // function saveBrewery() {
-  //   var saveBreweryButton = $("<td><button>save</button></td>").click(function() {
-  //   });
-  // };
+  deleteButtton.on("click","button",function(event){
+    $(event.target).parent().empty();
+  })
 
   function buildQueryURL() {
     console.log(cityEl)
@@ -81,6 +81,7 @@ $(document).ready(function () {
         var breweryType = response[i].brewery_type;
         var breweryURL = response[i].website_url;
         var sp = "-"
+
         // working on delete button
         // working on savebutton
         divEL.append(breweryName, sp, breweryType, sp, breweryAddress, sp, breweryURL, btnEl);
@@ -104,12 +105,13 @@ $(document).ready(function () {
       Type of Brewery: ${typeOfBrew}`
     );
 
-
     marker = new mapboxgl.Marker()
       .setLngLat([long, lat])
       .setPopup(popup)
       .addTo(map);
-    fly(long, lat);
+      markerArr.push(marker);
+    
+      fly(long, lat);
   }
 
   function fly(long, lat) {

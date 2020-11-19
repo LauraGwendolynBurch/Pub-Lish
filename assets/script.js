@@ -5,7 +5,6 @@ $(document).ready(function () {
   var pubAmount;
   var mapEl = $("#map");
   var localCity = localStorage.getItem("currentCity")
-  // var  = JSON.parse(localStorage.getItem("")) || []
   var pubAmount = localStorage.getItem("numberOfPubs")
   var marker;
   var NameOfCity;

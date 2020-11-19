@@ -64,9 +64,10 @@ function buildQueryURL() {
     // });
      
     // // create the popup
-    var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-      NameOfCity + 
-      " Type of Brewery: " + typeOfBrew 
+    var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+      `${NameOfCity} 
+      <br>
+      Type of Brewery: ${typeOfBrew}`
     );
      
     // // create DOM element for the marker

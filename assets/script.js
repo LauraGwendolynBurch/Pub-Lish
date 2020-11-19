@@ -15,7 +15,7 @@ $(document).ready(function () {
   var breweryAddress;
   var brewery_type;
   var breweryURL;
-
+  var searchResults = $("#search-result");
 
 
   searchBtn.on("click", function (event) {
@@ -36,34 +36,7 @@ $(document).ready(function () {
     buildQueryURL();
 
   };
-
-
-
-  function buildQueryURL() {
-    console.log(cityEl)
-    var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount;
-
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function (response) {
-      console.log(response);
-      for (var i = 0; i < pubAmount; i++) {
-        var tRow = $("<tr>");
-        var breweryName = $("<td>").text(response[i].name);
-        var breweryAddress = $("<td>").text(response[i].street);
-        var breweryType = $("<td>").text(response[i].brewery_type);
-        var breweryURL = $("<td>").text(response[i].website_url);
-        // working on delete button
-        // working on savebutton
-        tRow.append(breweryName, breweryAddress, breweryType, breweryURL, deleteBrewery);
-        $("#search-result").append(tRow);
-        createMarker(response[i].longitude, response[i].latitude);
-      }
-    });
-
-  };
-
+  
   // delete button for row (currently working to show button on all rows). 
   function deleteBrewery() {
     var deleteBreweryButton = $('<td><button>X</button></td>').click(function(event) {
@@ -77,49 +50,6 @@ $(document).ready(function () {
   //   });
   // };
 
-
-  // function mySave() {
-  //   var myContent = document.getElementById("myTextarea").value;
-  //   localStorage.setItem("myContent", myContent);
-  // }
-
-
-
-
-
-  // // possible zipcode render
-  // // function zipCode() {
-  // //   var queryURLZip = "https://api.openbrewerydb.org/breweries?by_postal=" + cityZip + "&per_page=" + pubAmount;
-  // //   $.ajax({
-  // //     url: queryURLZip,
-  // //     method: "GET"
-  // //   }).then(function (response) {
-  // //     console.log(response);
-  // //     for (var i = 0; i < pubAmount; i++) {
-  // //       var tRow = $("<tr>");
-  // //       var breweryName = $("<td>").text(response[i].name);
-  // //       var breweryAddress = $("<td>").text(response[i].street);
-  // //       var breweryType = $("<td>").text(response[i].brewery_type);
-  // //       var breweryURL = $("<td>").text(response[i].website_url);
-  // //       // working on delete button
-  // //       // working on savebutton
-  // //       // var deleteBrewery = $("<button>").on("click", function());
-  // //       tRow.append(breweryName, breweryAddress, breweryType, breweryURL);
-  // //       $("#search-result").append(tRow);
-  // //       createMarker(response[i].longitude, response[i].latitude);
-  // //     }
-  // //   });
-
-
-  // };
-
-  function createMarker(long, lat) {
-
-    var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-      NameOfCity +
-      " Type of Brewery: " + typeOfBrew
-    );
-
 function buildQueryURL() {
        console.log(cityEl)
     var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount * 2 ;
@@ -129,9 +59,19 @@ function buildQueryURL() {
         method: "GET"
       }).then(function(response){
         console.log(response);
+        searchResults.empty();
         for(var i=0;i<pubAmount;i++){
           NameOfCity=response[i].name;
           typeOfBrew=response[i].brewery_type;
+        var tRow = $("<tr>");
+        var breweryName = $("<td>").text(response[i].name);
+        var breweryAddress = $("<td>").text(response[i].street);
+        var breweryType = $("<td>").text(response[i].brewery_type);
+        var breweryURL = $("<td>").text(response[i].website_url);
+        // working on delete button
+        // working on savebutton
+        tRow.append(breweryName, breweryAddress, breweryType, breweryURL, deleteBrewery);
+        searchResults.append(tRow);
             if(response[i].longitude == null){
              
             }else{
@@ -178,15 +118,5 @@ function buildQueryURL() {
 
 
   storeCity();
-  // button made to clear all local storage and text content should we need
-  // var clearButton = $("#button")
-
-  // function buttonClear(){
-  //     localStorage.clear();
-  //     location.reload();
-  // }
-
-  //create button event to call the clearing of local storage 
-  // $(clearButton).on("click",buttonClear)
 
 

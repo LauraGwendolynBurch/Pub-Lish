@@ -3,17 +3,11 @@ $(document).ready(function () {
   var searchBtn = $("#searchButton");
   var cityEl;
   var pubAmount;
-  var mapEl = $("#map");
   var localCity = localStorage.getItem("currentCity")
   var pubAmount = localStorage.getItem("numberOfPubs")
   var marker;
   var NameOfCity;
   var typeOfBrew;
-  var cityZip;
-  var breweryName;
-  var breweryAddress;
-  var brewery_type;
-  var breweryURL;
   var searchResults = $("#search-result");
   var markerArr=[];
   deleteButtton=$("#search-result");
@@ -47,7 +41,7 @@ $(document).ready(function () {
   // delete button for row (currently working to show button on all rows). 
 
   deleteButtton.on("click","button",function(event){
-    $(event.target).parent().empty();
+    $(event.target).parent().remove();
   })
 
 
@@ -61,33 +55,22 @@ function buildQueryURL() {
     }).then(function (response) {
       console.log(response);
       searchResults.empty();
-      for (var i = 0; i < pubAmount; i++) {
+      for (var i = 0, j = 0; j < pubAmount; i++) {
         NameOfCity = response[i].name;
         typeOfBrew = response[i].brewery_type;
-
-
-
         var divEL = $("<div>");
         var btnEl = $("<button>");
-
-
-        divEL.addClass("notification", "is-danger");
+        divEL.addClass("notification");
         divEL.addClass("is-light");
         btnEl.addClass("delete");
-
-
-
         var breweryName = response[i].name;
         var breweryAddress = response[i].street;
         var breweryType = response[i].brewery_type;
         var breweryURL = response[i].website_url;
         var sp = "-"
-
-        // working on delete button
-        // working on savebutton
         divEL.append(breweryName, sp, breweryType, sp, breweryAddress, sp, breweryURL, btnEl);
 
-        searchResults.append(divEL);
+
         if (response[i].longitude == null
               || response[i].brewery_type == null
               || response[i].brewery_type == "large"
@@ -99,6 +82,8 @@ function buildQueryURL() {
 
         } else {
           createMarker(response[i].longitude, response[i].latitude);
+          searchResults.append(divEL);
+          j++;
         }
       }
     });

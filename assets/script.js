@@ -16,10 +16,17 @@ $(document).ready(function () {
   var brewery_type;
   var breweryURL;
   var searchResults = $("#search-result");
+  var markerArr=[];
 
 
   searchBtn.on("click", function (event) {
     event.preventDefault();
+    
+    for(var j=0;j<markerArr.length;j++){
+      removeMarker(markerArr[j]);
+    }
+      
+    
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     $("#cityName").val("");
@@ -90,12 +97,13 @@ function buildQueryURL() {
       Type of Brewery: ${typeOfBrew}`
     );
 
-
     marker = new mapboxgl.Marker()
       .setLngLat([long, lat])
       .setPopup(popup)
       .addTo(map);
-    fly(long, lat);
+      markerArr.push(marker);
+    
+      fly(long, lat);
   }
 
   function fly(long, lat) {
@@ -119,4 +127,4 @@ function buildQueryURL() {
 
   storeCity();
 
-
+})

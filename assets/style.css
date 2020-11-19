@@ -1,16 +1,11 @@
-.searchedTbl {
-    color: black;
-    background-color: #ffdd57;
-}
-
 html {
-    background-image: url(assets/Taps.jpg);
+    background-image: url(Taps.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-color: black;
-}
+  }
 
   .mapboxgl-popup-content{
     text-align: left;
@@ -18,5 +13,4 @@ html {
     font-size: 1.2em;
     font-weight: bolder;
     background-color: rgb(255 220 85)
-}
-
+  

@@ -30,10 +30,10 @@ $(document).ready(function () {
     cityEl = $("#cityName").val();
     pubAmount = $("#pubNumber").val();
     $("#cityName").val("");
-   buildQueryURL();
-   localStorage.setItem("currentCity", cityEl);
-   localStorage.setItem("numberOfPubs", pubAmount)
-});
+    buildQueryURL();
+    localStorage.setItem("currentCity", cityEl);
+    localStorage.setItem("numberOfPubs", pubAmount)
+  });
 
 
   function storeCity() {
@@ -43,52 +43,61 @@ $(document).ready(function () {
     buildQueryURL();
 
   };
-  
+
   // delete button for row (currently working to show button on all rows). 
+
   deleteButtton.on("click","button",function(event){
     $(event.target).parent().empty();
   })
 
-  //  save button for row
-  // function saveBrewery() {
-  //   var saveBreweryButton = $("<td><button>save</button></td>").click(function() {
-  //   });
-  // };
+  function buildQueryURL() {
+    console.log(cityEl)
+    var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount * 2;
 
-function buildQueryURL() {
-       console.log(cityEl)
-    var queryURL = "https://api.openbrewerydb.org/breweries?by_city=" + cityEl + "&per_page=" + pubAmount * 2 ;
-    
     $.ajax({
-        url: queryURL,
-        method: "GET"
-      }).then(function(response){
-        console.log(response);
-        searchResults.empty();
-        for(var i=0;i<pubAmount;i++){
-          NameOfCity=response[i].name;
-          typeOfBrew=response[i].brewery_type;
-        var tRow = $("<tr>");
-        var breweryName = $("<td>").text(response[i].name);
-        var breweryAddress = $("<td>").text(response[i].street);
-        var breweryType = $("<td>").text(response[i].brewery_type);
-        var breweryURL = $("<td>").text(response[i].website_url);
-        var deleteBrewery=$("<button>").text("X");
+      url: queryURL,
+      method: "GET"
+    }).then(function (response) {
+      console.log(response);
+      searchResults.empty();
+      for (var i = 0; i < pubAmount; i++) {
+        NameOfCity = response[i].name;
+        typeOfBrew = response[i].brewery_type;
+
+
+
+        var divEL = $("<div>");
+        var btnEl = $("<button>");
+
+
+        divEL.addClass("notification", "is-danger");
+        divEL.addClass("is-light");
+        btnEl.addClass("delete");
+
+
+
+        var breweryName = response[i].name;
+        var breweryAddress = response[i].street;
+        var breweryType = response[i].brewery_type;
+        var breweryURL = response[i].website_url;
+        var sp = "-"
+
         // working on delete button
         // working on savebutton
-        tRow.append(breweryName, breweryAddress, breweryType, breweryURL, deleteBrewery);
-        searchResults.append(tRow);
-            if(response[i].longitude == null){
-             
-            }else{
-          createMarker(response[i].longitude, response[i].latitude);
-            }
-        }
-      }); 
-     
-};
+        divEL.append(breweryName, sp, breweryType, sp, breweryAddress, sp, breweryURL, btnEl);
 
-  function createMarker(long, lat){
+        searchResults.append(divEL);
+        if (response[i].longitude == null) {
+
+        } else {
+          createMarker(response[i].longitude, response[i].latitude);
+        }
+      }
+    });
+
+  };
+
+  function createMarker(long, lat) {
     // // create the popup
     var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
       `${NameOfCity} 

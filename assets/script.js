@@ -47,7 +47,7 @@ $(document).ready(function () {
   // delete button for row (currently working to show button on all rows). 
 
   deleteButtton.on("click","button",function(event){
-    $(event.target).parent().empty();
+    $(event.target).parent().remove();
   })
 
 
@@ -71,7 +71,7 @@ function buildQueryURL() {
         var btnEl = $("<button>");
 
 
-        divEL.addClass("notification", "is-danger");
+        divEL.addClass("notification", "mapboxgl-popup-content");
         divEL.addClass("is-light");
         btnEl.addClass("delete");
 

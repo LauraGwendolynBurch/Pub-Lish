@@ -71,9 +71,9 @@ function buildQueryURL() {
         var btnEl = $("<button>");
 
 
-        divEL.addClass("notification", "mapboxgl-popup-content");
-        divEL.addClass("is-light");
+        divEL.addClass("notification");
         btnEl.addClass("delete");
+        divEL.addClass("textBox");
 
 
 
@@ -85,7 +85,7 @@ function buildQueryURL() {
 
         // working on delete button
         // working on savebutton
-        divEL.append(breweryName, sp, breweryType, sp, breweryAddress, sp, breweryURL, btnEl);
+        divEL.append(`${breweryName} <br> ${breweryType} <br> ${breweryAddress} <br> ${breweryURL}`, btnEl);
 
         searchResults.append(divEL);
         if (response[i].longitude == null

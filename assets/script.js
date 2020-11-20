@@ -60,6 +60,11 @@ function buildQueryURL() {
         typeOfBrew = response[i].brewery_type;
         var divEL = $("<div>");
         var btnEl = $("<button>");
+
+
+
+
+
         divEL.addClass("notification");
         divEL.addClass("is-light");
         btnEl.addClass("delete");

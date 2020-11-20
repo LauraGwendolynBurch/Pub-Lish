@@ -3,17 +3,11 @@ $(document).ready(function () {
   var searchBtn = $("#searchButton");
   var cityEl;
   var pubAmount;
-  var mapEl = $("#map");
   var localCity = localStorage.getItem("currentCity")
   var pubAmount = localStorage.getItem("numberOfPubs")
   var marker;
   var NameOfCity;
   var typeOfBrew;
-  var cityZip;
-  var breweryName;
-  var breweryAddress;
-  var brewery_type;
-  var breweryURL;
   var searchResults = $("#search-result");
   var markerArr=[];
   deleteButtton=$("#search-result");
@@ -61,22 +55,20 @@ function buildQueryURL() {
     }).then(function (response) {
       console.log(response);
       searchResults.empty();
-      for (var i = 0; i < pubAmount; i++) {
+      for (var i = 0, j = 0; j < pubAmount; i++) {
         NameOfCity = response[i].name;
         typeOfBrew = response[i].brewery_type;
-
-
-
         var divEL = $("<div>");
         var btnEl = $("<button>");
+
+
+       
+
 
 
         divEL.addClass("notification");
         btnEl.addClass("delete");
         divEL.addClass("textBox");
-
-
-
         var breweryName = response[i].name;
         var breweryAddress = response[i].street;
         var breweryType = response[i].brewery_type;
@@ -87,7 +79,7 @@ function buildQueryURL() {
         // working on savebutton
         divEL.append(`${breweryName} <br> ${breweryType} <br> ${breweryAddress} <br> ${breweryURL}`, btnEl);
 
-        searchResults.append(divEL);
+
         if (response[i].longitude == null
               || response[i].brewery_type == null
               || response[i].brewery_type == "large"
@@ -99,6 +91,8 @@ function buildQueryURL() {
 
         } else {
           createMarker(response[i].longitude, response[i].latitude);
+          searchResults.append(divEL);
+          j++;
         }
       }
     });

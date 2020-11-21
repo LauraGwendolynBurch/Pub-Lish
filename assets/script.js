@@ -62,18 +62,22 @@ function buildQueryURL() {
         var btnEl = $("<button>");
 
 
+       
 
 
 
         divEL.addClass("notification");
-        divEL.addClass("is-light");
         btnEl.addClass("delete");
+        divEL.addClass("textBox");
         var breweryName = response[i].name;
         var breweryAddress = response[i].street;
         var breweryType = response[i].brewery_type;
         var breweryURL = response[i].website_url;
         var sp = "-"
-        divEL.append(breweryName, sp, breweryType, sp, breweryAddress, sp, breweryURL, btnEl);
+
+        // working on delete button
+        // working on savebutton
+        divEL.append(`${breweryName} <br> ${breweryType} <br> ${breweryAddress} <br> ${breweryURL}`, btnEl);
 
 
         if (response[i].longitude == null

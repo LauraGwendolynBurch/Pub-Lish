@@ -9,8 +9,22 @@ html {
 
   .mapboxgl-popup-content{
     text-align: left;
-    box-shadow: seashell;
     font-size: 1.2em;
     font-weight: bolder;
     background-color: rgb(255 220 85)
+  }
   
+  .textBox { 
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: bolder;
+    background-color: rgb(255 220 85)
+  }
+
+  .title, .subtitle, .paragrahOne {
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .paragrahOne {
+    font-size: larger;
+  }

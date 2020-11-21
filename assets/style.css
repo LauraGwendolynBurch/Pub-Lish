@@ -21,7 +21,11 @@ html {
     background-color: rgb(255 220 85)
   }
 
-  .title, .subtitle, .paragrahOne {
+  .title{
+    font-family: 'Rye', cursive;
+  }
+  
+  .subtitle, .paragrahOne {
     font-family: 'Oswald', sans-serif;
   }
 

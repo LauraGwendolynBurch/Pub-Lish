@@ -69,6 +69,7 @@ function buildQueryURL() {
         divEL.addClass("notification");
         btnEl.addClass("delete");
         divEL.addClass("textBox");
+        divEL.addClass("is-capitalized");
         var breweryName = response[i].name;
         var breweryAddress = response[i].street;
         var breweryType = response[i].brewery_type;
@@ -77,7 +78,7 @@ function buildQueryURL() {
 
         // working on delete button
         // working on savebutton
-        divEL.append(`${breweryName} <br> ${breweryType} <br> ${breweryAddress} <br> ${breweryURL}`, btnEl);
+        divEL.append(`${breweryName} <br> ${breweryType} <br> ${breweryAddress} <br> <a href = "${breweryURL}" target="_blank"> ${breweryURL} </a>`, btnEl);
 
 
         if (response[i].longitude == null

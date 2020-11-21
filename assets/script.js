@@ -78,7 +78,7 @@ function buildQueryURL() {
 
         // working on delete button
         // working on savebutton
-        divEL.append(`${breweryName} <br> ${breweryType} <br> ${breweryAddress} <br> <a href = "${breweryURL}" target="_blank"> ${breweryURL} </a>`, btnEl);
+        divEL.append(`${breweryName} <br> ${breweryType} <br> ${breweryAddress} <br> <a href = "${breweryURL}" target="_blank" class="is-size-6"> ${breweryURL} </a>`, btnEl);
 
 
         if (response[i].longitude == null

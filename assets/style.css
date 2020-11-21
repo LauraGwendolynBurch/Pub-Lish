@@ -18,7 +18,9 @@ html {
     text-align: left;
     font-size: 1.2em;
     font-weight: bolder;
-    background-color: rgb(255 220 85)
+    background-color: rgb(255 220 85);
+    box-sizing: border-box;
+    width: 100%
   }
 
   .title{
